@@ -1,0 +1,24 @@
+{
+  "name": "ossim-dev-utils",
+  "version": "1.0.0",
+  "homepage": "https://github.com/somejavadev/ossim-dev-utils",
+  "authors": [
+    "somejavadev"
+  ],
+  "description": "Custom utils to help with ossim plugin dev.",
+  "main": "index.html",
+  "keywords": [
+    "ossim",
+    "plugin",
+    "dev",
+    "utils"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
