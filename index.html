@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Ossim-dev-utils by somejavadev</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Ossim-dev-utils</h1>
+        <h2>Custom written utilities to help with ossim plugin development</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/somejavadev/ossim-dev-utils/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/somejavadev/ossim-dev-utils/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/somejavadev/ossim-dev-utils" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <h3>
+<a id="about" class="anchor" href="#about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>About:</h3>
+
+<p>This project was written purely to assist with the creation of ossim rule based plugins. The project currently exists out of an Angular / Bootstrap front end which calls a very basic and lightweight PHP REST service to pull data out of an existing ossim installation. To use this web app you will need to be able to login to your ossim installation via SSH.     </p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation:</h3>
+
+<p>To install this web app, simply download the project structure and copy the web folder to your ossim apache directory.<br>
+Currently the apache directory would be at: /var/www/<br>
+Copy the projects web directory here: /var/www/web<br>
+Once you have done this you can open up your browser and visit the ossim admin URL in the following format: <a href="https://x.x.x.x/web/frontend/index.html">https://x.x.x.x/web/frontend/index.html</a> (this will bring you to the dev utilities page).     </p>
+
+<p>Currently you do not need to specify a username or password for the utility to access the ossim database, the app will read these values from ossim's config in: /etc/ossim/ossim_setup.conf       </p>
+
+<h3>
+<a id="disclaimer" class="anchor" href="#disclaimer" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><strong>Disclaimer:</strong>
+</h3>
+
+<p>This web app is not affiliated with, nor is it an official app of <a href="https://www.alienvault.com/">AlienVault</a><br>
+Usage of this app is at your own risk.   </p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
