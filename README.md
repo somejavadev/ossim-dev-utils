@@ -11,7 +11,12 @@ Copy the projects web directory here: /var/www/web
 Once you have done this you can open up your browser and visit the ossim admin URL in the following format: https://x.x.x.x/web/frontend/index.html this will bring you to the dev utilities page.     
 
 Currently you do not need to specify a username or password for the utility to access the ossim database, the app will read these values from ossim's config in: /etc/ossim/ossim_setup.conf       
-        
+  
+## Screenshot:    
+   
+![alt tag](http://i.imgur.com/UV0C1Cv.png)
+    
+          
 ### **Disclaimer:**    
 This web app is not affiliated with, nor is it an official app of [AlienVault](https://www.alienvault.com/)     
 Usage of this app is at your own risk.   
