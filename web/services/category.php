@@ -1,6 +1,6 @@
 <?php include 'header.php';?>
 <?php
-$sql = "SELECT id, name FROM category";
+$sql = "SELECT id, name FROM category ORDER BY name;";
 $result = $conn->query($sql);
 $json = array();
 

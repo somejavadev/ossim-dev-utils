@@ -1,6 +1,15 @@
 <?php include 'header.php';?>
 <?php
+$catId = $_GET['catid'];
+
 $sql =  "SELECT id, name, cat_id FROM subcategory";
+
+if (is_numeric($catId)) {
+    $sql = $sql . " where cat_id = " . $catId;
+}
+
+$sql = $sql . " ORDER BY name;";
+
 $result = $conn->query($sql);
 $json = array();
 

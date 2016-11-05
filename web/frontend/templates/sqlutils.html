@@ -1,0 +1,126 @@
+<h3>Configure Plugin</h3>
+<br/>
+<form name="pluginForm" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginId">id: </label>
+        <div class="col-sm-10">
+            <input id="pluginId" class="form-control" ng-model="devCtrl.plugin.id" type="number"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginName">Name: </label>
+        <div class="col-sm-10">
+            <input id="pluginName" class="form-control" ng-model="devCtrl.plugin.name" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginType">Type: </label>
+        <div class="col-sm-10">
+            <input readonly id="pluginType" class="form-control" ng-model="devCtrl.plugin.type" type="number" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginDescription">Description: </label>
+
+        <div class="col-sm-10">
+            <input id="pluginDescription" class="form-control" ng-model="devCtrl.plugin.description" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginVendor">Vendor: </label>
+        <div class="col-sm-10">
+            <select id="pluginVendor" class="form-control" ng-options="item as item.vendor for item in devCtrl.vendors track by item.vendor"
+                    ng-model="devCtrl.plugin.vendor">
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="pluginProductType">Product type: </label>
+        <div class="col-sm-10">
+
+            <select id="pluginProductType" class="form-control" ng-options="item as item.name for item in devCtrl.producttypes track by item.id"
+                    ng-model="devCtrl.plugin.product_type">
+
+            </select>
+        </div>
+    </div>
+</form>
+<hr>
+<tt>plugin = {{devCtrl.plugin}}</tt><br/>
+<hr>
+
+<h3>Configure Plugin sid</h3>
+<br/>
+<form class="form-horizontal">
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="sidId">Id: </label>
+            <div class="col-sm-10">
+                <input id="sidId" class="form-control" ng-model="devCtrl.pluginsid.sid" type="number"/>
+            </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="sidPluginName">Name: </label>
+        <div class="col-sm-10">
+            <input id="sidPluginName" class="form-control" ng-model="devCtrl.pluginsid.name" type="text"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="classification">Classification: </label>
+        <div class="col-sm-10">
+            <select id="classification" class="form-control"
+                    ng-options="item as item.name for item in devCtrl.classifications track by item.id"
+                    ng-model="devCtrl.pluginsid.classification">
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label"  for="categories">Category: </label>
+        <div class="col-sm-10">
+            <select id="categories" ng-change="devCtrl.getSubCategories()" class="form-control" ng-options="item as item.name for item in devCtrl.categories track by item.id"
+                    ng-model="devCtrl.pluginsid.category">
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="subcategories">Subcategory: </label>
+        <div class="col-sm-10">
+            <select id="subcategories" class="form-control" ng-options="item as item.name for item in devCtrl.subcategories track by item.id"
+                    ng-model="devCtrl.pluginsid.subcategory">
+
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="priority">Priority: </label>
+        <div class="col-sm-10">
+            <input id="priority" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="10" min="1"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label" for="reliability">Reliability: </label>
+        <div class="col-sm-10">
+            <input id="reliability" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="9" min="0"/>
+        </div>
+    </div>
+</form>
+
+<hr>
+<tt>pluginsid = {{devCtrl.pluginsid}}</tt><br/>
+<hr>
+
+
+

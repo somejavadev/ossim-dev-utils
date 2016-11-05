@@ -1,6 +1,6 @@
 <?php include 'header.php';?>
 <?php
-$sql = "SELECT id, name, description, priority FROM classification ORDER BY name;";
+$sql =  "SELECT id, name FROM product_type ORDER BY name;";
 $result = $conn->query($sql);
 $json = array();
 
@@ -11,8 +11,6 @@ if ($result->num_rows > 0) {
         $object = (object) [
             'id' => $row["id"],
             'name' => $row["name"],
-            'description' => $row["description"],
-            'priority' => $row["priority"]
         ];
 
         array_push($json, $object);
@@ -20,5 +18,4 @@ if ($result->num_rows > 0) {
 }
 echo json_encode($json);
 ?>
-
 <?php include 'footer.php';?>
