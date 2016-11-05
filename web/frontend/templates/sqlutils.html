@@ -18,7 +18,7 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="pluginType">Type: </label>
         <div class="col-sm-10">
-            <input readonly id="pluginType" class="form-control" ng-model="devCtrl.plugin.type" type="number" />
+            <input readonly id="pluginType" class="form-control" ng-model="devCtrl.plugin.type" type="number"/>
         </div>
     </div>
 
@@ -30,21 +30,41 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" ng-show="!devCtrl.newVendor.show">
         <label class="col-sm-2 control-label" for="pluginVendor">Vendor: </label>
         <div class="col-sm-10">
-            <select id="pluginVendor" class="form-control" ng-options="item as item.vendor for item in devCtrl.vendors track by item.vendor"
+            <select id="pluginVendor" class="form-control"
+                    ng-options="item as item.vendor for item in devCtrl.vendors track by item.vendor"
                     ng-model="devCtrl.plugin.vendor">
-
             </select>
         </div>
+        <button type="button" ng-click="devCtrl.toggleVendorAdd()" class="add-button btn btn-success pull-right"
+                data-type="plus">
+            Custom Vendor
+        </button>
+    </div>
+
+    <div class="form-group" ng-show="devCtrl.newVendor.show">
+        <label class="col-sm-2 control-label" for="newPluginVendor">New vendor: </label>
+        <div class="col-sm-10">
+            <input id="newPluginVendor" class="form-control" ng-model="devCtrl.newVendor.name"/>
+        </div>
+        <button type="button" ng-click="devCtrl.addVendor()" class="add-button btn btn-success pull-right"
+                data-type="plus">
+            Add Vendor
+        </button>
+
+        <button type="button" ng-click="devCtrl.toggleVendorAdd()" class="add-button btn btn-warning pull-right">
+            Cancel
+        </button>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label" for="pluginProductType">Product type: </label>
         <div class="col-sm-10">
 
-            <select id="pluginProductType" class="form-control" ng-options="item as item.name for item in devCtrl.producttypes track by item.id"
+            <select id="pluginProductType" class="form-control"
+                    ng-options="item as item.name for item in devCtrl.producttypes track by item.id"
                     ng-model="devCtrl.plugin.product_type">
 
             </select>
@@ -60,10 +80,10 @@
 <form class="form-horizontal">
 
     <div class="form-group">
-        <label class="col-sm-2 control-label" for="sidId">Id: </label>
-            <div class="col-sm-10">
-                <input id="sidId" class="form-control" ng-model="devCtrl.pluginsid.sid" type="number"/>
-            </div>
+        <label class="col-sm-2 control-label" for="sidId">Sid: </label>
+        <div class="col-sm-10">
+            <input id="sidId" class="form-control" ng-model="devCtrl.pluginsid.sid" type="number"/>
+        </div>
     </div>
 
     <div class="form-group">
@@ -84,9 +104,10 @@
     </div>
 
     <div class="form-group">
-        <label class="col-sm-2 control-label"  for="categories">Category: </label>
+        <label class="col-sm-2 control-label" for="categories">Category: </label>
         <div class="col-sm-10">
-            <select id="categories" ng-change="devCtrl.getSubCategories()" class="form-control" ng-options="item as item.name for item in devCtrl.categories track by item.id"
+            <select id="categories" ng-change="devCtrl.getSubCategories()" class="form-control"
+                    ng-options="item as item.name for item in devCtrl.categories track by item.id"
                     ng-model="devCtrl.pluginsid.category">
 
             </select>
@@ -96,7 +117,8 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="subcategories">Subcategory: </label>
         <div class="col-sm-10">
-            <select id="subcategories" class="form-control" ng-options="item as item.name for item in devCtrl.subcategories track by item.id"
+            <select id="subcategories" class="form-control"
+                    ng-options="item as item.name for item in devCtrl.subcategories track by item.id"
                     ng-model="devCtrl.pluginsid.subcategory">
 
             </select>
@@ -106,14 +128,16 @@
     <div class="form-group">
         <label class="col-sm-2 control-label" for="priority">Priority: </label>
         <div class="col-sm-10">
-            <input id="priority" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="10" min="1"/>
+            <input id="priority" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="10"
+                   min="1"/>
         </div>
     </div>
 
     <div class="form-group">
         <label class="col-sm-2 control-label" for="reliability">Reliability: </label>
         <div class="col-sm-10">
-            <input id="reliability" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="9" min="0"/>
+            <input id="reliability" class="form-control" ng-model="devCtrl.pluginsid.reliability" type="number" max="9"
+                   min="0"/>
         </div>
     </div>
 </form>
@@ -122,5 +146,24 @@
 <tt>pluginsid = {{devCtrl.pluginsid}}</tt><br/>
 <hr>
 
-
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <button type="button" ng-click="devCtrl.generateSQL()" class="btn btn-primary btn-lg btn-block">Generate</button>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+<hr>
+<h4>Results:</h4>
+<div class="row">
+    <samp>
+        {{devCtrl.resultPlugin}}
+    </samp>
+    <br/>
+    <samp>
+        {{devCtrl.resultPluginSid}}
+    </samp>
+</div>
+<br/>
+<hr>
 
