@@ -125,8 +125,13 @@ ossimDevApp.controller("devController", function ($http) {
 
         if(devController.pluginForm.$valid) {
 
+            var optionalDescription = null;
+            if(!_.isNull(plugin.description)) {
+                optionalDescription = "'" + plugin.description + "'";
+            }
+
             var insertPlugin = "INSERT IGNORE INTO plugin (id, type, name, description, vendor, product_type) VALUES (" +
-                plugin.id + ", " + plugin.type + ", '" + plugin.name + "', '" + plugin.description + "', '" + plugin.vendor.vendor + "', " + plugin.product_type.id + ");"
+                plugin.id + ", " + plugin.type + ", '" + plugin.name + "', " + optionalDescription + ", '" + plugin.vendor.vendor + "', " + plugin.product_type.id + ");"
             console.log(insertPlugin);
 
             var insertPluginSid = "INSERT IGNORE INTO plugin_sid (plugin_id, sid, category_id, subcategory_id, class_id, name, priority, reliability) VALUES (" +
