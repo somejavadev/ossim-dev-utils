@@ -1,18 +1,37 @@
 <h3>Configure Plugin</h3>
 <br/>
-<form name="pluginForm" class="form-horizontal">
-    <div class="form-group">
+<form name="devCtrl.pluginForm" class="form-horizontal" ng-submit="devCtrl.generateSQL()" novalidate>
+
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.pluginId.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginId.$invalid}">
         <label class="col-sm-2 control-label" for="pluginId">id: </label>
         <div class="col-sm-10">
-            <input id="pluginId" class="form-control" ng-model="devCtrl.plugin.id" type="number"/>
+            <input id="pluginId" name="pluginId" class="form-control"
+                   ng-model="devCtrl.plugin.id" type="number" min="0" max="999999"
+                   required/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.pluginId.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginId.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.pluginName.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginName.$invalid}">
         <label class="col-sm-2 control-label" for="pluginName">Name: </label>
         <div class="col-sm-10">
-            <input id="pluginName" class="form-control" ng-model="devCtrl.plugin.name" type="text"/>
+            <input id="pluginName" name="pluginName" class="form-control"
+                   ng-model="devCtrl.plugin.name" type="text"
+                   ng-maxlength="100" ng-minlength="1" required/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.pluginName.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginName.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
     <div class="form-group">
@@ -30,18 +49,38 @@
         </div>
     </div>
 
-    <div class="form-group" ng-show="!devCtrl.newVendor.show">
+    <div class="form-group" ng-show="!devCtrl.newVendor.show"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.pluginVendor.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginVendor.$invalid}">
         <label class="col-sm-2 control-label" for="pluginVendor">Vendor: </label>
         <div class="col-sm-10">
-            <select id="pluginVendor" class="form-control"
+            <select id="pluginVendor" class="form-control" name="pluginVendor"
                     ng-options="item as item.vendor for item in devCtrl.vendors track by item.vendor"
-                    ng-model="devCtrl.plugin.vendor">
+                    ng-model="devCtrl.plugin.vendor" required>
+                <option value="">Select Vendor</option>
             </select>
         </div>
-        <button type="button" ng-click="devCtrl.toggleVendorAdd()" class="add-button btn btn-success pull-right"
-                data-type="plus">
-            Custom Vendor
-        </button>
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2 pull-right">
+                <div ng-messages="(devCtrl.pluginForm.pluginVendor.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginVendor.$error"
+                     class="pull-right custom-error" role="alert">
+                    <div ng-messages-include="errorMessages"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2 pull-right">
+                <button type="button" ng-click="devCtrl.toggleVendorAdd()" class="add-button btn btn-success pull-right"
+                        data-type="plus">
+                    Custom Vendor
+                </button>
+            </div>
+        </div>
+
+
     </div>
 
     <div class="form-group" ng-show="devCtrl.newVendor.show">
@@ -59,101 +98,162 @@
         </button>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.pluginProductType.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginProductType.$invalid}">
         <label class="col-sm-2 control-label" for="pluginProductType">Product type: </label>
         <div class="col-sm-10">
 
-            <select id="pluginProductType" class="form-control"
+            <select id="pluginProductType" class="form-control" name="pluginProductType"
                     ng-options="item as item.name for item in devCtrl.producttypes track by item.id"
-                    ng-model="devCtrl.plugin.product_type">
-
+                    ng-model="devCtrl.plugin.product_type" required>
+                <option value="">Select Product Type</option>
             </select>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.pluginProductType.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.pluginProductType.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
     </div>
-</form>
-<hr>
-<tt>plugin = {{devCtrl.plugin}}</tt><br/>
-<hr>
+    <hr>
+    <tt>plugin = {{devCtrl.plugin}}</tt><br/>
+    <hr>
 
-<h3>Configure Plugin sid</h3>
-<br/>
-<form class="form-horizontal">
-
-    <div class="form-group">
+    <h3>Configure Plugin sid</h3>
+    <br/>
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.sidId.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.sidId.$invalid}">
         <label class="col-sm-2 control-label" for="sidId">Sid: </label>
         <div class="col-sm-10">
-            <input id="sidId" class="form-control" ng-model="devCtrl.pluginsid.sid" type="number"/>
+            <input id="sidId" name="sidId" class="form-control" ng-model="devCtrl.pluginsid.sid" type="number"
+                   max="99999" min="0" required/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.sidId.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.sidId.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.sidPluginName.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.sidPluginName.$invalid}">
         <label class="col-sm-2 control-label" for="sidPluginName">Name: </label>
         <div class="col-sm-10">
-            <input id="sidPluginName" class="form-control" ng-model="devCtrl.pluginsid.name" type="text"/>
+            <input id="sidPluginName" name="sidPluginName" class="form-control" ng-model="devCtrl.pluginsid.name"
+                   type="text" required maxlength="100" minlength="1"/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.sidPluginName.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.sidPluginName.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.classification.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.classification.$invalid}">
         <label class="col-sm-2 control-label" for="classification">Classification: </label>
         <div class="col-sm-10">
-            <select id="classification" class="form-control"
+            <select id="classification" class="form-control" name="classification" required
                     ng-options="item as item.name for item in devCtrl.classifications track by item.id"
                     ng-model="devCtrl.pluginsid.classification">
+                <option value="">Select Classification</option>
             </select>
+        </div>
+
+        <div ng-messages="(devCtrl.pluginForm.classification.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.classification.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.categories.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.categories.$invalid}">
         <label class="col-sm-2 control-label" for="categories">Category: </label>
         <div class="col-sm-10">
-            <select id="categories" ng-change="devCtrl.getSubCategories()" class="form-control"
+            <select id="categories" ng-change="devCtrl.getSubCategories()" class="form-control" required
+                    name="categories"
                     ng-options="item as item.name for item in devCtrl.categories track by item.id"
                     ng-model="devCtrl.pluginsid.category">
-
+                <option value="">Select Category</option>
             </select>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.categories.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.categories.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.subcategory.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.subcategory.$invalid}">
         <label class="col-sm-2 control-label" for="subcategories">Subcategory: </label>
         <div class="col-sm-10">
-            <select id="subcategories" class="form-control"
+            <select id="subcategories" class="form-control" required name="subcategory"
                     ng-options="item as item.name for item in devCtrl.subcategories track by item.id"
                     ng-model="devCtrl.pluginsid.subcategory">
-
+                <option value="">Select Subcategory</option>
             </select>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.subcategory.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.subcategory.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.priority.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.priority.$invalid}">
         <label class="col-sm-2 control-label" for="priority">Priority: </label>
         <div class="col-sm-10">
-            <input id="priority" class="form-control" ng-model="devCtrl.pluginsid.priority" type="number" max="10"
+            <input id="priority" name="priority" class="form-control" ng-model="devCtrl.pluginsid.priority"
+                   type="number" max="10" required
                    min="1"/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.priority.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.priority.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
 
-    <div class="form-group">
+    <div class="form-group"
+         ng-class="{ 'has-error': (devCtrl.pluginForm.reliability.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.reliability.$invalid}">
         <label class="col-sm-2 control-label" for="reliability">Reliability: </label>
         <div class="col-sm-10">
-            <input id="reliability" class="form-control" ng-model="devCtrl.pluginsid.reliability" type="number" max="9"
+            <input id="reliability" name="reliability" class="form-control" ng-model="devCtrl.pluginsid.reliability"
+                   type="number" max="9" required
                    min="0"/>
         </div>
+
+        <div ng-messages="(devCtrl.pluginForm.reliability.$touched || devCtrl.pluginForm.$submitted) && devCtrl.pluginForm.reliability.$error"
+             class="pull-right custom-error" role="alert">
+            <div ng-messages-include="errorMessages"></div>
+        </div>
+
     </div>
+
+    <hr>
+    <tt>pluginsid = {{devCtrl.pluginsid}}</tt><br/>
+    <hr>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Generate</button>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <hr>
+
 </form>
 
-<hr>
-<tt>pluginsid = {{devCtrl.pluginsid}}</tt><br/>
-<hr>
 
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <button type="button" ng-click="devCtrl.generateSQL()" class="btn btn-primary btn-lg btn-block">Generate</button>
-    </div>
-    <div class="col-md-4"></div>
-</div>
-<hr>
 <h4>Results:</h4>
 <div class="row">
     <samp>

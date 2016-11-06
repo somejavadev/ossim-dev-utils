@@ -1,4 +1,4 @@
-var ossimDevApp = angular.module("ossimDev", ['ui.router']);
+var ossimDevApp = angular.module("ossimDev", ['ui.router', 'ngMessages']);
 
 ossimDevApp.config(function ($stateProvider, $urlRouterProvider) {
 
@@ -23,17 +23,17 @@ ossimDevApp.controller("devController", function ($http) {
     var plugin = {
         id: 1,
         type: 1,
-        name: '',
-        description: '',
-        vendor: '',
-        product_type: ''
+        name: null,
+        description: null,
+        vendor: null,
+        product_type: null
     };
     var pluginsid = {
         sid: 1,
-        category: {id: 'all'},
-        subcategory: {},
-        classification: {},
-        name: '',
+        category:null,
+        subcategory:null,
+        classification: null,
+        name: null,
         priority: 2,
         reliability: 2
     };
@@ -60,7 +60,11 @@ ossimDevApp.controller("devController", function ($http) {
     };
 
     var getSubCategories = function () {
-        $http.get("../services/subcategory.php", {params: {'catid': pluginsid.category.id}}).then(function success(response) {
+        var useCatId = 'all';
+        if(!(_.isNull( pluginsid.category) || _.isNull( pluginsid.category.id))) {
+            useCatId = pluginsid.category.id;
+        }
+        $http.get("../services/subcategory.php", {params: {'catid': useCatId}}).then(function success(response) {
             console.log(response);
             devController.subcategories = response.data;
         }, function error(response) {
@@ -118,16 +122,21 @@ ossimDevApp.controller("devController", function ($http) {
 
     var generateSQL = function () {
 
-        var insertPlugin = "INSERT IGNORE INTO plugin (id, type, name, description, vendor, product_type) VALUES (" +
-            plugin.id + ", " + plugin.type + ", '" + plugin.name + "', '" + plugin.description + "', '" + plugin.vendor.vendor + "', " + plugin.product_type.id + ");"
-        console.log(insertPlugin);
 
-        var insertPluginSid = "INSERT IGNORE INTO plugin_sid (plugin_id, sid, category_id, subcategory_id, class_id, name, priority, reliability) VALUES (" +
-            plugin.id + ", " + pluginsid.sid + ", " + pluginsid.category.id + ", " + pluginsid.subcategory.id + ", " + pluginsid.classification.id + ", '" + pluginsid.name + "', " + pluginsid.priority + ", " + pluginsid.reliability + ");";
-        console.log(insertPluginSid);
+        if(devController.pluginForm.$valid) {
 
-        devController.resultPlugin = insertPlugin;
-        devController.resultPluginSid = insertPluginSid;
+            var insertPlugin = "INSERT IGNORE INTO plugin (id, type, name, description, vendor, product_type) VALUES (" +
+                plugin.id + ", " + plugin.type + ", '" + plugin.name + "', '" + plugin.description + "', '" + plugin.vendor.vendor + "', " + plugin.product_type.id + ");"
+            console.log(insertPlugin);
+
+            var insertPluginSid = "INSERT IGNORE INTO plugin_sid (plugin_id, sid, category_id, subcategory_id, class_id, name, priority, reliability) VALUES (" +
+                plugin.id + ", " + pluginsid.sid + ", " + pluginsid.category.id + ", " + pluginsid.subcategory.id + ", " + pluginsid.classification.id + ", '" + pluginsid.name + "', " + pluginsid.priority + ", " + pluginsid.reliability + ");";
+            console.log(insertPluginSid);
+
+            devController.resultPlugin = insertPlugin;
+            devController.resultPluginSid = insertPluginSid;
+
+        }
     };
 
     devController.categories = categories;
@@ -156,8 +165,6 @@ ossimDevApp.controller("devController", function ($http) {
     devController.getClassifications();
     devController.getProductTypes();
     devController.getVendors();
-
-
 });
 
 ossimDevApp.controller("aboutController", function ($http) {
